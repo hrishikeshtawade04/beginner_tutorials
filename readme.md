@@ -33,12 +33,12 @@ roscore
 To run talker node, open a new terminal window and run following command
 ```
 cd <path to catkin_ws>
-source /devel/setup.bash
+source devel/setup.bash
 rosrun beginner_tutorials talker
 ```
 To run listener node, open a new terminal window and run following command
 ```
 cd <path to catkin_ws>
-source /devel/setup.bash
+source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
