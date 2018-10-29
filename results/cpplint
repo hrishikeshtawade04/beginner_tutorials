@@ -1,0 +1,6 @@
+Command Used: 
+cpplint $( find . -name \*.h -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+
+Done processing ./src/talker.cpp
+Done processing ./src/listener.cpp
+
