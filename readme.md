@@ -15,8 +15,8 @@ To install ROS, follow the instructions on this [link](http://wiki.ros.org/kinet
 
 ## Build Instructions
 ```
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/
+mkdir -p catkin_ws/src
+cd catkin_ws/
 catkin_make
 source devel/setup.bash
 cd src/
