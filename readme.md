@@ -24,7 +24,7 @@ git clone --recursive https://github.com/hrishikeshtawade04/beginner_tutorials.g
 cd ..
 catkin_make
 ```
-## Running instructions
+## Running Instructions
 Open a new terminal window and run following command
 ```
 rosrun beginner_tutorials talker
