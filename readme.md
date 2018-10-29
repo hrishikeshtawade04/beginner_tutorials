@@ -25,11 +25,20 @@ cd ..
 catkin_make
 ```
 ## Running Instructions
-Open a new terminal window and run following command
+To start roscore, open a new terminal window and run following command
 ```
+source /opt/ros/kinetic/setup.bash
+roscore
+```
+To run talker node, open a new terminal window and run following command
+```
+cd <path to catkin_ws>
+source /devel/setup.bash
 rosrun beginner_tutorials talker
 ```
-Open a new terminal window and run following command
+To run listener node, open a new terminal window and run following command
 ```
+cd <path to catkin_ws>
+source /devel/setup.bash
 rosrun beginner_tutorials listener
 ```
