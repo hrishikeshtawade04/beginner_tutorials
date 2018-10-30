@@ -1,9 +1,18 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+<h1 align=center> ENPM808X ROS Tutorials </h1>
+</p>
+<p align="center">
+<img src="/readme_images/ROS.png">
+</p>
+</p>
+<p align="center">
+Reference for image: <a href='https://www.google.com/imgres?imgurl=https%3A%2F%2Fmoveit.ros.org%2Fassets%2Fimages%2Flogo%2FROS_logo.png&imgrefurl=https%3A%2F%2Fmoveit.ros.org%2F&docid=CyLySsR7n4CjkM&tbnid=yjk2FyriYEe3iM%3A&vet=10ahUKEwjLorK96a7eAhUBjVkKHcARAu0QMwhnKA0wDQ..i&w=680&h=365&bih=672&biw=1301&q=ROS%20image&ved=0ahUKEwjLorK96a7eAhUBjVkKHcARAu0QMwhnKA0wDQ&iact=mrc&uact=8'>link</a>
+</p>
 
 ## Project Overview
-The project covers creating publisher and subscriber in ROS. It has two following nodes:
-* Talker
-* Listener
+The project covers creating publisher and subscriber in ROS Kinetic. It has two following nodes:
+* Talker : Publishes "Happy Halloween" to topic named 'chatter'.
+* Listener : Subscibes to the topic named 'chatter' and prints the received messages on the terminal.
 
 ## Dependencies
 
@@ -44,3 +53,10 @@ cd <path to catkin_ws>
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
+## RQT Graph
+Following is the detailed RQT graph upon successful execution of the nodes.
+</p>
+<p align="center">
+<img src="/readme_images/rosgraph.png">
+</p>
+</p>
