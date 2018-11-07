@@ -116,6 +116,7 @@ int main(int argc, char **argv) {
     /// node sleeps when not publishing to match the publish rate
     loop_rate.sleep();
     ++count;
+    ROS_DEBUG_STREAM("Argument is " << count);
   }
 
   return 0;
