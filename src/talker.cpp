@@ -48,15 +48,14 @@
 extern std::string msgToBeSent = "Happy Halloween";
 
 /**
- * @brief chnages the base string of talker
+ * @brief changes the base string of talker
  * @param req new string from service client
  * @param res response of the service
  * @return true when service function executes properly
  */
 bool change(beginner_tutorials::changeBaseString::Request &req,
             const beginner_tutorials::changeBaseString::Response &res) {
-  /// assigns requested string to response string
-  // res.changedString = req.newString;
+  /// Updating the base string
   msgToBeSent = req.newString;
   return true;
 }
