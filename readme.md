@@ -41,17 +41,31 @@ To start roscore, open a new terminal window and run following command
 source /opt/ros/kinetic/setup.bash
 roscore
 ```
-To run talker node, open a new terminal window and run following command
+To run talker node, open a new terminal window and run following command. The frequncy is the output frequency of talker messages on the terminal. Frequency values should be positve and more then zero othewise it throws an error message.
 ```
 cd <path to catkin_ws>
 source devel/setup.bash
-rosrun beginner_tutorials talker
+rosrun beginner_tutorials talker <frequency>
 ```
 To run listener node, open a new terminal window and run following command
 ```
 cd <path to catkin_ws>
 source devel/setup.bash
 rosrun beginner_tutorials listener
+```
+## Running ROS launch demo
+To run the launch file so that both talker and listener node opens together run the following command. The frequency is the output frequncy of talker messages on the terminal. Frequncy values should be positve and more then zero othewise it throws an error message. If the frequency is not mentioned it will run the default frequency of 10.
+```
+killall -9 roscore   (to stop any ongoing roscore)
+killall -9 rosmaster (to stop any ongoing roscore)
+cd <path to catkin_ws>
+source devel/setup.bash
+roslaunch beginner_tutorials talkAndListen.launch freq:=<frequency>
+```
+## Running Service
+The service change_string changes the outputted based string by talker and the changes gets reflected both in talker and listener. Following are the instructions to run the service assuming that  talker and listener nodes are running using any  of the above methods.
+```
+rosservice call /change_string "HalloweenOver"
 ```
 ## RQT Graph
 Following is the detailed RQT graph upon successful execution of the nodes.
