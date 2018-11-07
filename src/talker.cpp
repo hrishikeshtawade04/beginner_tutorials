@@ -61,9 +61,11 @@ bool change(beginner_tutorials::changeBaseString::Request &req,
 }
 
 /**
- * @brief   main function
- *
- * @return  0 code functions properly
+ * @brief main function
+ * @param argc count of arguments on terminal and code
+ * @param argv pointer to pointers of arguments
+ * @return 0 when node executes successfully
+ *         1 when error occurs in node
  */
 int main(int argc, char **argv) {
   /// Initializes the talker node
