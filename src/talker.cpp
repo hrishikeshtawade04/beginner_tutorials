@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
     ROS_DEBUG_STREAM("Argument is " << argv[1]);
     /// converts string to integer
     freq = atoi(argv[1]);
-    if (freq == 0) {
+    if (freq <= 0) {
       ROS_ERROR_STREAM(
           "This argument not valid. Frequency set to default value 10");
       freq = 10;
