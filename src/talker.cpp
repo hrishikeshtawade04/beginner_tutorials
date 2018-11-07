@@ -53,9 +53,9 @@ extern std::string msgToBeSent = "Happy Halloween";
  * @param res response of the service
  * @return true when service function executes properly
  */
-bool change(beginner_tutorials::changeBaseString::Request &req,
-            beginner_tutorials::changeBaseString::Response &res) {
-  /// assigns
+bool change(const beginner_tutorials::changeBaseString::Request &req,
+            const beginner_tutorials::changeBaseString::Response &res) {
+  /// assigns requested string to response string
   res.changedString = req.newString;
   msgToBeSent = res.changedString;
   return true;
@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
     freq = atoi(argv[1]);
     if (freq == 0) {
       ROS_ERROR_STREAM(
-          "This argument not valid. Setting the frequency to default value of 10");
+          "This argument not valid. Frequency set to default value 10");
       freq = 10;
     }
 
