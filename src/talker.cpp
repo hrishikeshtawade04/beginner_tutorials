@@ -42,31 +42,71 @@
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/changeBaseString.h"
 
+/// Initialize the base string to print
+extern std::string msgToBeSent = "Happy Halloween";
 
 /**
- * @brief   main function
- *
- * @return  0 code functions properly
+ * @brief changes the base string of talker
+ * @param req new string from service client
+ * @param res response of the service
+ * @return true when service function executes properly
+ */
+bool change(beginner_tutorials::changeBaseString::Request &req,
+            const beginner_tutorials::changeBaseString::Response &res) {
+  /// Updating the base string
+  msgToBeSent = req.newString;
+  return true;
+}
+
+/**
+ * @brief main function
+ * @param argc count of arguments on terminal and code
+ * @param argv pointer to pointers of arguments
+ * @return 0 when node executes successfully
+ *         1 when error occurs in node
  */
 int main(int argc, char **argv) {
   /// Initializes the talker node
   ros::init(argc, argv, "talker");
+  /// Initializing frequency
+  int freq = 0;
+  /// Checking if we have two arguments
+  if (argc == 2) {
+    /// recording the argument passed
+    ROS_DEBUG_STREAM("Argument is " << argv[1]);
+    /// converts string to integer
+    freq = atoi(argv[1]);
+    if (freq <= 0) {
+      ROS_ERROR_STREAM(
+          "This argument not valid. Frequency set to default value 10");
+      freq = 10;
+    }
+
+  } else {
+    /// shuts down the node when no argument given
+    ROS_FATAL_STREAM("No frequency argument was passed.");
+    ros::shutdown();
+    return 1;
+  }
   /// Creating a handle to process
   ros::NodeHandle n;
   /// defines the topic and type of message on which the
   /// publisher is going to publish data
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
+  /// defining service server
+  ros::ServiceServer server = n.advertiseService("change_string", change);
   /// specifying the rate at  which the loop will run
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(freq);
   /// A count of how many messages we have sent.
   int count = 0;
   while (ros::ok()) {
     /// Creating a message object to stuff data and then publish it.
     std_msgs::String msg;
     std::stringstream ss;
-    ss << "Happy Halloween" << count;
+    ss << msgToBeSent << count;
     msg.data = ss.str();
     /// prints the sent data on the terminal
     ROS_INFO("%s", msg.data.c_str());
@@ -77,9 +117,10 @@ int main(int argc, char **argv) {
     /// node sleeps when not publishing to match the publish rate
     loop_rate.sleep();
     ++count;
+    ROS_DEBUG_STREAM("Argument is " << count);
   }
-
 
   return 0;
 }
+
 
