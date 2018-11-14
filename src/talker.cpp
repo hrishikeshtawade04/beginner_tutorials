@@ -37,15 +37,21 @@
  *  @section DESCRIPTION
  *
  *  This program publishes the message Happy Halloween
+ *  and broadcasts a transform
  */
 
+#include <tf/transform_broadcaster.h>
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseString.h"
 
-/// Initialize the base string to print
-extern std::string msgToBeSent = "Happy Halloween";
+struct msgToBeSent {
+  std::string message;
+};
+
+/// Initialize object for the message
+msgToBeSent msgToBeSent1;
 
 /**
  * @brief changes the base string of talker
@@ -54,9 +60,10 @@ extern std::string msgToBeSent = "Happy Halloween";
  * @return true when service function executes properly
  */
 bool change(beginner_tutorials::changeBaseString::Request &req,
-            const beginner_tutorials::changeBaseString::Response &res) {
+            beginner_tutorials::changeBaseString::Response &res) {
   /// Updating the base string
-  msgToBeSent = req.newString;
+  res.changedString = req.newString;
+  msgToBeSent1.message = req.newString;
   return true;
 }
 
@@ -68,8 +75,20 @@ bool change(beginner_tutorials::changeBaseString::Request &req,
  *         1 when error occurs in node
  */
 int main(int argc, char **argv) {
+  /// Iniitalizing string to be sent
+  msgToBeSent1.message = "Happy Halloween";
   /// Initializes the talker node
   ros::init(argc, argv, "talker");
+  /// Making a tf broadcaster object
+  tf::TransformBroadcaster br;
+  /// Initializing container for transform
+  tf::Transform transform;
+  /// Setting origin for transform
+  transform.setOrigin(tf::Vector3(1.0, 2.0, 3.0));
+  /// Setting the angles
+  tf::Quaternion q;
+  q.setRPY(0, 0, 10);
+  transform.setRotation(q);
   /// Initializing frequency
   int freq = 0;
   /// Checking if we have two arguments
@@ -97,16 +116,20 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
   /// defining service server
-  ros::ServiceServer server = n.advertiseService("change_string", change);
+  ros::ServiceServer server = n.advertiseService("change_string",
+                                                 change);
   /// specifying the rate at  which the loop will run
   ros::Rate loop_rate(freq);
   /// A count of how many messages we have sent.
   int count = 0;
   while (ros::ok()) {
+    /// calculating tranform and broadcasting it
+    br.sendTransform(
+        tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
     /// Creating a message object to stuff data and then publish it.
     std_msgs::String msg;
     std::stringstream ss;
-    ss << msgToBeSent << count;
+    ss << msgToBeSent1.message << count;
     msg.data = ss.str();
     /// prints the sent data on the terminal
     ROS_INFO("%s", msg.data.c_str());
