@@ -186,6 +186,10 @@ Now run the following command in new terminal play the storedTalker.bag file and
 cd <path to repository>/results
 rosbag play storedTalker.bag
 ```
+To disable the rosbag recording you can use following command.
+```
+roslaunch beginner_tutorials talkAndListen.launch freq:=<frequency> enableBag:=false
+```
 ## RQT Graph
 Following is the detailed RQT graph upon successful execution of the nodes.
 </p>
