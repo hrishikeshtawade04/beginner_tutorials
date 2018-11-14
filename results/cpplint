@@ -1,10 +1,11 @@
-Command Used: 
 cpplint $( find . -name \*.h -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
 
-./src/talker.cpp:56:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseString::Request &req  [runtime/references] [2]
+./src/talker.cpp:62:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseString::Request &req  [runtime/references] [2]
+
+./src/talker.cpp:63:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseString::Response &res  [runtime/references] [2]
 
 Done processing ./src/talker.cpp
 Done processing ./src/listener.cpp
-Total errors found: 1
-
+Done processing ./test/change_string_client.cpp
+Total errors found: 2
 
