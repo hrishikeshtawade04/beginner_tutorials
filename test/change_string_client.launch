@@ -1,0 +1,8 @@
+<launch>
+  <arg
+        name="freq"
+        default="10"
+  />
+  <node name="talker" pkg="beginner_tutorials" type="talker" output = "screen" args="$(arg freq)"/>
+  <test pkg="beginner_tutorials" test-name="change_string_client" type="change_string_client" />
+</launch>
