@@ -46,10 +46,10 @@
 #include <beginner_tutorials/changeBaseString.h>
 
 /**
- * @brief      Tests whether the service exists and changes text
+ * @brief  Tests whether the service exists and changes text
  *
- * @param[in]  ChangeBaseStringTest   Name of test suite
- * @param[in]  checkChangeString  Name of the test
+ * @param  ChangeBaseStringTest   Name of test suite
+ * @param  checkChangeString  Name of the test
  */
 TEST(ChangeBaseStringTest, checkChangeString) {
   /// creating a node handle
