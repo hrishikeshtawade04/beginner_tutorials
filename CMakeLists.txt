@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(beginner_tutorials)
 
 ## Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg tf)
 
 ## Declare ROS messages and services
 #add_message_files(FILES Num.msg)
@@ -23,4 +23,25 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 
 add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+
+  add_rostest_gtest(
+  change_string_client
+  test/change_string_client.launch
+  test/change_string_client.cpp
+  )
+  target_link_libraries(
+  change_string_client
+  ${catkin_LIBRARIES}
+  )
+  add_dependencies(
+  change_string_client
+  talker
+  
+  ${PROJECT_NAME}_generate_messages_cpp
+  ${catkin_EXPORTED_TARGETS}
+  )
+endif()
 
