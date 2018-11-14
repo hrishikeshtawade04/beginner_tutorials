@@ -44,8 +44,12 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseString.h"
 
-/// Initialize the base string to print
-extern std::string msgToBeSent = "Happy Halloween";
+struct msgToBeSent {
+  std::string message;
+};
+
+/// Initialize object for the message
+msgToBeSent msgToBeSent1;
 
 /**
  * @brief changes the base string of talker
@@ -56,7 +60,7 @@ extern std::string msgToBeSent = "Happy Halloween";
 bool change(beginner_tutorials::changeBaseString::Request &req,
             const beginner_tutorials::changeBaseString::Response &res) {
   /// Updating the base string
-  msgToBeSent = req.newString;
+  msgToBeSent1.message = req.newString;
   return true;
 }
 
@@ -68,6 +72,8 @@ bool change(beginner_tutorials::changeBaseString::Request &req,
  *         1 when error occurs in node
  */
 int main(int argc, char **argv) {
+  /// Iniitalizing string to be sent
+  msgToBeSent1.message = "Happy Halloween";
   /// Initializes the talker node
   ros::init(argc, argv, "talker");
   /// Initializing frequency
@@ -106,7 +112,7 @@ int main(int argc, char **argv) {
     /// Creating a message object to stuff data and then publish it.
     std_msgs::String msg;
     std::stringstream ss;
-    ss << msgToBeSent << count;
+    ss << msgToBeSent1.message << count;
     msg.data = ss.str();
     /// prints the sent data on the terminal
     ROS_INFO("%s", msg.data.c_str());
